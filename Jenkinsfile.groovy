@@ -1,6 +1,6 @@
 import groovy.json.*
 node{
-    def flowdsl = new File("FlowPipeline.groovy")
+    def flowdsl = new File("FlowPipeline.groovy").text
 	def body = new JsonBuilder( [overwrite: true, dsl: flowdsl] ).toString()
 	step([$class: 'ElectricFlowGenericRestApi', 
             configuration: 'Colocated Flow',
