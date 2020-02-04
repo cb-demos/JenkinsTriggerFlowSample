@@ -1,22 +1,25 @@
 import groovy.json.*
 
 node{
-	//step(checkout([$class: 'GitSCM', branches: [[name: '*/master']],userRemoteConfigs: [[url: 'https://github.com/cb-demos/JenkinsTriggerFlowSample.git']]]))
-        git url: 'https://github.com/cb-demos/JenkinsTriggerFlowSample.git'
+    git url: 'https://github.com/cb-demos/JenkinsTriggerFlowSample.git'
 	env.WORKSPACE = pwd()
-	def flowdsl = readFile "${env.WORKSPACE}/FlowPipeline.groovy"
-	def body = new JsonBuilder( [overwrite: true, dsl: flowdsl] ).toString()	
-	step([$class: 'ElectricFlowGenericRestApi', 
-			configuration: 'Colocated Flow',
-			urlPath : '/server/dsl',
-			httpMethod : 'POST',
-			body : body,
-			envVarNameForResult:'FLOW_REST_RESPONSE'
-		])
+	
+	["FlowPipeline","KubernetesApplication"].each { file ->
+		def flowdsl = readFile "${env.WORKSPACE}/${file}.groovy"
+		def RestBody = new JsonBuilder( [overwrite: true, dsl: flowdsl] ).toString()	
+		step([$class: 'ElectricFlowGenericRestApi', 
+				configuration: 'Colocated Flow',
+				urlPath : '/server/dsl',
+				httpMethod : 'POST',
+				body : RestBody,
+				envVarNameForResult:"${file}_RESPONSE"
+			])
+	}
+	
 	step([$class: 'ElectricFlowPipelinePublisher', 
 		configuration: 'Colocated Flow',
 		projectName: 'Default',
 		pipelineName: 'Jenkins-triggered',
-		addParam: '{"pipeline":{"pipelineName":"Jenkins-triggered","parameters":"[{\\\"parameterName\\\": \\\"InputParam\\\", \\\"parameterValue\\\": \\\"xyz\\\"}]"}}'
+		addParam: '{"pipeline":{"pipelineName":"Jenkins-triggered","parameters":"[{\\\"parameterName\\\": \\\"nginx_version\\\", \\\"parameterValue\\\": \\\"1.7.9\\\"}]"}}'
 	])
 }
