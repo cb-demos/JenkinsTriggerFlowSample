@@ -1,20 +1,6 @@
 import groovy.json.*
 node{
-    def flowdsl = '''\
-		project "Default",{
-		  pipeline "Jenkins-triggered",{
-			formalParameter "InputParam"
-			stage "Stage 1",{
-			  task "command",{
-				actualParameter = [
-				  'commandToRun': 'echo Triggered from Jenkins, $[InputParam]',
-				]
-				taskType = 'COMMAND'
-			  }
-			}
-		  }
-		}
-    '''.stripIndent()
+    def flowdsl = new File("FlowPipeline.groovy")
 	def body = new JsonBuilder( [overwrite: true, dsl: flowdsl] ).toString()
 	step([$class: 'ElectricFlowGenericRestApi', 
             configuration: 'Colocated Flow',
