@@ -18,7 +18,7 @@ node{
 	
 	step([$class: 'ElectricFlowPipelinePublisher', 
 		configuration: 'Colocated Flow',
-		projectName: 'Default',
+		projectName: 'Kubernetes Example',
 		pipelineName: 'Jenkins-triggered',
 		addParam: '{"pipeline":{"pipelineName":"Jenkins-triggered","parameters":"[{\\\"parameterName\\\": \\\"nginx_version\\\", \\\"parameterValue\\\": \\\"1.7.9\\\"}]"}}'
 	])

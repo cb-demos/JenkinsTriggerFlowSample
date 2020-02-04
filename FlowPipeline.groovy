@@ -15,7 +15,7 @@ project 'Kubernetes Example',{
 					'ec_enforceDependencies': '1',
 					'ec_smartDeployOption': '1',
 					'ec_stageArtifacts': '0',
-					'nginx_version': '1.7.9',
+					'nginx_version': '$[nginx_version]',
 				]
 				environmentName = 'dev'
 				environmentProjectName = projectName
