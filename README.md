@@ -1,3 +1,3 @@
 # JenkinsTriggerFlowSample
 
-This is some interesting text. 
+This repository illustrates how to both create and invoke Flow Pipelines from a Jenkins pipeline.
