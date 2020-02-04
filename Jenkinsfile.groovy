@@ -1,8 +1,8 @@
 import groovy.json.*
 
 node{
-	step(checkout([$class: 'GitSCM', branches: [[name: '*/master']],userRemoteConfigs: [[url: 'https://github.com/cb-demos/JenkinsTriggerFlowSample.git']]]))
-	/*
+	//step(checkout([$class: 'GitSCM', branches: [[name: '*/master']],userRemoteConfigs: [[url: 'https://github.com/cb-demos/JenkinsTriggerFlowSample.git']]]))
+        git url: 'https://github.com/cb-demos/JenkinsTriggerFlowSample.git'
 	def flowdsl = new File("FlowPipeline.groovy").text
 	def body = new JsonBuilder( [overwrite: true, dsl: flowdsl] ).toString()	
 	step([$class: 'ElectricFlowGenericRestApi', 
@@ -18,5 +18,4 @@ node{
 		pipelineName: 'Jenkins-triggered',
 		addParam: '{"pipeline":{"pipelineName":"Jenkins-triggered","parameters":"[{\\\"parameterName\\\": \\\"InputParam\\\", \\\"parameterValue\\\": \\\"xyz\\\"}]"}}'
 	])
-	*/
 }
