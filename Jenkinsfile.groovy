@@ -5,12 +5,12 @@ node{
 	
 
 	step([$class: 'ElectricFlowGenericRestApi', 
-            configuration: 'Colocated Flow',
-            urlPath : '/server/dsl',
-            httpMethod : 'POST',
-            body : body,
-            envVarNameForResult:'FLOW_REST_RESPONSE'
-        ]) {
+			configuration: 'Colocated Flow',
+			urlPath : '/server/dsl',
+			httpMethod : 'POST',
+			body : body,
+			envVarNameForResult:'FLOW_REST_RESPONSE'
+		]) {
 			def flowdsl = new File("FlowPipeline.groovy").text
 			def body = new JsonBuilder( [overwrite: true, dsl: flowdsl] ).toString()			
 		}
