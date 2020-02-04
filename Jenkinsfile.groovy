@@ -1,7 +1,7 @@
 import groovy.json.*
 
 node{
-	step(checkout([$class: 'GitSCM', branches: [[name: '*/master']],userRemoteConfigs: [[url: 'https://github.com/cb-demos/JenkinsTriggerFlowSample.git']]]))
+	step([$class: 'GitSCM', branches: [[name: '*/master']],userRemoteConfigs: [[url: 'https://github.com/cb-demos/JenkinsTriggerFlowSample.git']]])
 	
 	def flowdsl = new File("FlowPipeline.groovy").text
 	def body = new JsonBuilder( [overwrite: true, dsl: flowdsl] ).toString()	
