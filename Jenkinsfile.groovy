@@ -3,8 +3,8 @@ import groovy.json.*
 node{
 	//step(checkout([$class: 'GitSCM', branches: [[name: '*/master']],userRemoteConfigs: [[url: 'https://github.com/cb-demos/JenkinsTriggerFlowSample.git']]]))
         git url: 'https://github.com/cb-demos/JenkinsTriggerFlowSample.git'
-	def workspace = manager.build.getEnvVars()["WORKSPACE"]
-	def flowdsl = new File("${workspace}/FlowPipeline.groovy").text
+	env.WORKSPACE = pwd()
+	def flowdsl = readFile "${env.WORKSPACE}/FlowPipeline.groovy"
 	def body = new JsonBuilder( [overwrite: true, dsl: flowdsl] ).toString()	
 	step([$class: 'ElectricFlowGenericRestApi', 
 			configuration: 'Colocated Flow',
