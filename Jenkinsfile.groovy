@@ -4,7 +4,7 @@ node{
     git url: 'https://github.com/cb-demos/JenkinsTriggerFlowSample.git'
 	env.WORKSPACE = pwd()
 	
-	["FlowPipeline","KubernetesApplication"].each { file ->
+	["KubernetesApplication","FlowPipeline"].each { file ->
 		def flowdsl = readFile "${env.WORKSPACE}/${file}.groovy"
 		def RestBody = new JsonBuilder( [overwrite: true, dsl: flowdsl] ).toString()	
 		step([$class: 'ElectricFlowGenericRestApi', 
