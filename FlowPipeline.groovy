@@ -1,6 +1,7 @@
 project 'Kubernetes Example',{
 	pipeline "Jenkins-triggered",{
 		formalParameter "nginx_version"
+		formalParameter "build_id"
 		stage "Dev",{
 		
 			task "Approve",{
