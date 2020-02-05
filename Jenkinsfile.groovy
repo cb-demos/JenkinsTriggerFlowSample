@@ -28,10 +28,21 @@ node{
 			])
 	}
 	
+	def Params = new JsonBuilder(
+		[ pipeline: [
+			pipelineName: "Jenkins-triggered",
+			parameters: [
+				parameterName: "nginx_version",
+				parameterValue: "1.7.9"
+				]
+			]
+		]
+	).toString()
 	step([$class: 'ElectricFlowPipelinePublisher', 
 		configuration: 'Colocated Flow',
 		projectName: 'Kubernetes Example',
 		pipelineName: 'Jenkins-triggered',
-		addParam: '{"pipeline":{"pipelineName":"Jenkins-triggered","parameters":"[{\\\"parameterName\\\": \\\"nginx_version\\\", \\\"parameterValue\\\": \\\"1.7.9\\\"}]"}}'
+		//addParam: '{"pipeline":{"pipelineName":"Jenkins-triggered","parameters":"[{\\\"parameterName\\\": \\\"nginx_version\\\", \\\"parameterValue\\\": \\\"1.7.9\\\"}]"}}'
+	      	addParam: Params
 	])
 }
