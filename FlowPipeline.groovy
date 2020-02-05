@@ -4,6 +4,18 @@ project 'Kubernetes Example',{
 		formalParameter "build_id"
 		stage "Dev",{
 		
+			task 'Get Jenkins Build Log', {
+				taskType = 'PLUGIN'
+				subpluginKey = 'EC-Jenkins'
+				subprocedure = 'GetBuildLog'
+				actualParameter = [
+					build_number: '$[build_id]',
+					config_name: 'Alpha',
+					job_name: 'Pipeline Create Flow Pipeline and Run it',
+					result_outpp: '/myJob/buildinfo',
+				]
+			}
+		
 			task "Approve",{
 				taskType = 'MANUAL'
 				approver = [
