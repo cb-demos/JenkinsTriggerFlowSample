@@ -35,7 +35,11 @@ node{
 					[
 						parameterName: "nginx_version",
 						parameterValue: "1.7.9"
-					]
+					],
+					[
+						parameterName: "build_id",
+						parameterValue: "${BUILD_ID}"
+					]					
 				]
 			]
 		]
