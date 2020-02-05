@@ -42,13 +42,20 @@ def hostName = getResource(resourceName: "local").hostName
 	hostName = "localhost"
 	as a workaround
 */
+def Zone = "zone2"
+zone Zone
+/*
+	There's a problem with zones on the Thunder demo instance. The above is a workaround
+*/
+
 
 project proj,{
 
 	envs.each { env ->
 		environment env, {
 			environmentTier tier, {
-				resource "${app}_${env}_${tier}", hostName: hostName
+				resource "${app}_${env}_${tier}", hostName: hostName,
+					zoneName: Zone // Workaround
 			}
 
 			// Custom properties
