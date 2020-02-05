@@ -10,8 +10,8 @@ project 'Kubernetes Example',{
 				subprocedure = 'GetBuildLog'
 				actualParameter = [
 					build_number: '$[build_id]',
-					config_name: 'Alpha',
-					job_name: 'Pipeline Create Flow Pipeline and Run it',
+					config_name: 'Bravo',
+					job_name: 'Create Flow Pipeline and Run it',
 					result_outpp: '/myJob/buildinfo',
 				]
 			}
